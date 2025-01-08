@@ -2,57 +2,57 @@ import axios from "axios";
 
 const API_URL = "http://127.0.0.1:8000"; // Replace with your FastAPI server URL
 
-// Fetch all users
-export const fetchUsers = async () => {
+// Fetch all documents
+export const fetchDocuments = async () => {
   try {
-    const response = await axios.get(`${API_URL}/users/`);
+    const response = await axios.get(`${API_URL}/documents/`);
     return response.data;
   } catch (error) {
-    console.error("Error fetching users:", error);
+    console.error("Error fetching documents:", error);
     throw error;
   }
 };
 
-// Fetch a single user by ID
-export const fetchUserById = async (id) => {
+// Fetch a single document by ID
+export const fetchDocumentById = async (id) => {
   try {
-    const response = await axios.get(`${API_URL}/users/${id}`);
+    const response = await axios.get(`${API_URL}/documents/${id}`);
     return response.data;
   } catch (error) {
-    console.error(`Error fetching user with ID ${id}:`, error);
+    console.error(`Error fetching document with ID ${id}:`, error);
     throw error;
   }
 };
 
-// Create a new user
-export const createUser = async (user) => {
+// Create a new document
+export const createDocument = async (document) => {
   try {
-    const response = await axios.post(`${API_URL}/users/`, user);
+    const response = await axios.post(`${API_URL}/documents/`, document);
     return response.data;
   } catch (error) {
-    console.error("Error creating user:", error);
+    console.error("Error creating document:", error);
     throw error;
   }
 };
 
-// Update an existing user by ID
-export const updateUser = async (id, user) => {
+// Update an existing document by ID
+export const updateDocument = async (id, document) => {
   try {
-    const response = await axios.put(`${API_URL}/users/${id}`, user);
+    const response = await axios.put(`${API_URL}/documents/${id}`, document);
     return response.data;
   } catch (error) {
-    console.error(`Error updating user with ID ${id}:`, error);
+    console.error(`Error updating document with ID ${id}:`, error);
     throw error;
   }
 };
 
-// Delete a user by ID
-export const deleteUser = async (id) => {
+// Delete a document by ID
+export const deleteDocument = async (id) => {
   try {
-    const response = await axios.delete(`${API_URL}/users/${id}`);
+    const response = await axios.delete(`${API_URL}/documents/${id}`);
     return response.data;
   } catch (error) {
-    console.error(`Error deleting user with ID ${id}:`, error);
+    console.error(`Error deleting document with ID ${id}:`, error);
     throw error;
   }
 };
