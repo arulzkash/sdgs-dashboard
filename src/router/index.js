@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import Home from "@/components/Home.vue";
 import Crud from "@/components/Crud.vue";
 import Dashboard from "@/components/Dashboard.vue";
+import EditDocument from "@/components/EditDocument.vue";
 
 const routes = [
   {
@@ -17,6 +18,11 @@ const routes = [
         path: "crud",
         name: "CrudPage",
         component: Crud,
+      },
+      {
+        path: "/edit/:id",
+        name: "EditDocument",
+        component: EditDocument,
       },
     ],
   },

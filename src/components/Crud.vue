@@ -1,3 +1,4 @@
+// filepath: /c:/project2/sdgs-dashboard/src/components/Crud.vue
 <template>
   <div>
     <h1>CRUD Operations</h1>
@@ -5,6 +6,7 @@
     <table v-if="documents.length">
       <thead>
         <tr>
+          <th>Actions</th>
           <th title="Country Name">Country Name</th>
           <th title="Country ISO3">Country ISO3</th>
           <th title="Year" @click="sortDocuments">Year</th>
@@ -37,12 +39,15 @@
           <th title="Urban population growth (annual %)">Urban pop. growth (%)</th>
           <th title="Urban population">Urban pop.</th>
           <th title="Urban population (% of total population)">Urban pop. (%)</th>
-          <th>Actions</th>
         </tr>
       </thead>
       
       <tbody>
         <tr v-for="document in documents" :key="document._id">
+          <td>
+            <button class="edit-button" @click="editDocument(document._id)">Edit</button>
+            <button class="delete-button" @click="deleteDocument(document._id)">Delete</button>
+          </td>
           <td>{{ document["Country Name"] }}</td>
           <td>{{ document["Country ISO3"] }}</td>
           <td>{{ document.Year }}</td>
@@ -75,10 +80,6 @@
           <td>{{ formatNumber(document.data["Urban population growth (annual %)"]) }}</td>
           <td>{{ formatNumber(document.data["Urban population"]) }}</td>
           <td>{{ formatNumber(document.data["Urban population (% of total population)"]) }}</td>
-          <td>
-            <button @click="editDocument(document._id)">Edit</button>
-            <button @click="deleteDocument(document._id)">Delete</button>
-          </td>
         </tr>
       </tbody>
     </table>
@@ -126,8 +127,7 @@ export default {
       }
     },
     editDocument(id) {
-      // Implement edit document functionality
-      console.log(`Edit document with ID ${id}`);
+      this.$router.push(`/edit/${id}`); // Navigate to the edit page
     },
     formatNumber(value) {
       if (typeof value === 'number') {
@@ -159,5 +159,30 @@ th, td {
 th {
   background-color: #f2f2f2;
   cursor: pointer; /* Indicate that the header is clickable */
+}
+
+tbody tr:nth-child(odd) {
+  background-color: #f9f9f9; /* Light gray for odd rows */
+}
+
+tbody tr:nth-child(even) {
+  background-color: #ffffff; /* White for even rows */
+}
+
+.edit-button, .delete-button {
+  background-color: #e7e7e7; /* Light gray */
+  color: black;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.edit-button:hover {
+  background-color: #d4d4d4; /* Darker gray */
+}
+
+.delete-button:hover {
+  background-color: #d4d4d4; /* Darker gray */
 }
 </style>

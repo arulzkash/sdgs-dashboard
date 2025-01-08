@@ -36,7 +36,7 @@ export const createDocument = async (document) => {
 };
 
 // Update an existing document by ID
-export const updateDocument = async (id, document) => {
+export const updateDocumentById = async (id, document) => {
   try {
     const response = await axios.put(`${API_URL}/documents/${id}`, document);
     return response.data;

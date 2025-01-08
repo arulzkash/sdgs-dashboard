@@ -25,10 +25,12 @@ async def create_document(document: dict) -> dict:
 
 
 async def update_document(id: str, document: dict) -> dict:
+    # Remove the '_id' field from the document to avoid modifying it
+    document.pop("_id", None)
     result = await document_collection.update_one(
         {"_id": ObjectId(id)}, {"$set": document}
     )
-    if result.modified_count:
+    if result.matched_count:
         document["_id"] = id
         return document
     return None
