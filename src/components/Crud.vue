@@ -14,7 +14,7 @@
           <th>Actions</th>
           <th title="Country Name">Country Name</th>
           <th title="Country ISO3">Country ISO3</th>
-          <th title="Year" @click="sortDocuments">Year</th>
+          <th title="Year" class="sortable-header underline" @click="toggleSortOrder">Year</th>
           <th title="Agricultural land (sq. km)">Agri. land (sq. km)</th>
           <th title="Agricultural land (% of land area)">Agri. land (%)</th>
           <th title="Arable land (% of land area)">Arable land (%)</th>
@@ -50,8 +50,8 @@
       <tbody>
         <tr v-for="document in documents" :key="document._id">
           <td>
-            <button class="edit-button" @click="editDocument(document._id)">Edit</button>
-            <button class="delete-button" @click="confirmDelete(document._id)">Delete</button>
+            <button class="warning-button" @click="editDocument(document._id)">Edit</button>
+            <button class="danger-button" @click="confirmDelete(document._id)">Delete</button>
           </td>
           <td>{{ document["Country Name"] }}</td>
           <td>{{ document["Country ISO3"] }}</td>
@@ -123,6 +123,11 @@ export default {
         }
       });
     },
+    toggleSortOrder() {
+      // Toggle the sort order between 'asc' and 'desc'
+      this.sortOrder = this.sortOrder === 'desc' ? 'asc' : 'desc';
+      this.sortDocuments(); // Re-sort documents after toggling
+    },
     async deleteDocument(id) {
       try {
         await deleteDocument(id);
@@ -171,6 +176,43 @@ export default {
   margin-top: 20px; /* Jarak dari atas halaman */
 }
 
+/* Button Warning (Kuning) */
+.warning-button {
+  background-color: #ffc107; /* Warna kuning */
+  color: black; /* Teks hitam */
+  padding: 5px 10px; /* Ukuran tombol */
+  border: none; /* Hapus border default */
+  border-radius: 5px; /* Sudut membulat */
+  cursor: pointer; /* Tampilkan kursor pointer */
+  font-size: 14px; /* Ukuran font */
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2); /* Efek bayangan */
+  transition: background-color 0.3s; /* Efek animasi */
+}
+
+/* Gaya tombol saat di-hover */
+.warning-button:hover {
+  background-color: #e0a800; /* Warna kuning lebih gelap saat hover */
+}
+
+/* Button Danger (Merah) */
+.danger-button {
+  background-color: #dc3545; /* Warna merah */
+  color: white; /* Teks putih */
+  padding: 3px 5px; /* Ukuran tombol */
+  border: none; /* Hapus border default */
+  border-radius: 5px; /* Sudut membulat */
+  cursor: pointer; /* Tampilkan kursor pointer */
+  font-size: 14px; /* Ukuran font */
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2); /* Efek bayangan */
+  transition: background-color 0.3s; /* Efek animasi */
+}
+
+/* Gaya tombol saat di-hover */
+.danger-button:hover {
+  background-color: #a71d2a; /* Warna merah lebih gelap saat hover */
+}
+
+
 /* Gaya tombol utama */
 .primary-button {
   background-color: #007bff; /* Warna biru */
@@ -215,6 +257,16 @@ tbody tr:nth-child(odd) {
 tbody tr:nth-child(even) {
   background-color: #ffffff;
 }
+
+/* year button sort */
+.sortable-header.underline {
+  cursor: pointer; /* Menunjukkan bahwa elemen bisa diklik */
+  text-decoration: underline; /* Memberikan garis bawah permanen */
+  text-decoration-color: #000000; /* Warna garis bawah (bisa disesuaikan) */
+  text-decoration-thickness: 2px; /* Ketebalan garis bawah */
+}
+
+
 
 /* Buttons */
 .edit-button, .delete-button {
