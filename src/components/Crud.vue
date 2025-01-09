@@ -1,8 +1,13 @@
 // filepath: /c:/project2/sdgs-dashboard/src/components/Crud.vue
 <template>
   <div>
-    <h1>CRUD Operations</h1>
-    <button @click="loadDocuments">Load Documents</button>
+    <div class="Title-container">
+      <h1>Manage Data</h1>
+    </div>
+    <!-- Tambahkan container untuk tombol -->
+    <div class="button-container">
+      <button @click="loadDocuments" class="primary-button">Load Documents</button>
+    </div>
     <table v-if="documents.length">
       <thead>
         <tr>
@@ -143,34 +148,69 @@ export default {
 </script>
 
 <style scoped>
+/* Default styles (light mode) */
+/* Gaya untuk container tombol */
+.button-container {
+  margin: 10px 0; /* Beri jarak atas dan bawah */
+  display: flex; /* Untuk tata letak fleksibel */
+  justify-content: flex-start; /* Posisi tombol di kiri (bisa diganti ke 'center' atau 'flex-end') */
+}
+.Title-container {
+  font-size: xx-large;
+  display: flex;
+  flex-direction: column; /* Elemen diatur secara vertikal */
+  align-items: center; /* Elemen dipusatkan secara horizontal */
+  margin-top: 20px; /* Jarak dari atas halaman */
+}
+
+/* Gaya tombol utama */
+.primary-button {
+  background-color: #007bff; /* Warna biru */
+  color: white; /* Teks putih */
+  padding: 10px 20px; /* Ukuran tombol */
+  border: none; /* Hapus border default */
+  border-radius: 5px; /* Sudut membulat */
+  cursor: pointer; /* Tampilkan kursor pointer */
+  font-size: 14px; /* Ukuran font */
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2); /* Efek bayangan */
+  transition: background-color 0.3s; /* Efek animasi */
+}
+
+/* Gaya tombol saat di-hover */
+.primary-button:hover {
+  background-color: #0056b3; /* Warna biru lebih gelap saat hover */
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
   overflow-x: auto;
   display: block;
-  font-size: 12px; /* Smaller font size for compact view */
+  font-size: 12px;
 }
 
 th, td {
   border: 1px solid #ddd;
-  padding: 4px; /* Reduced padding for compact view */
+  padding: 4px;
+  color: black; /* Teks default hitam */
 }
 
 th {
   background-color: #f2f2f2;
-  cursor: pointer; /* Indicate that the header is clickable */
+  cursor: pointer;
 }
 
 tbody tr:nth-child(odd) {
-  background-color: #f9f9f9; /* Light gray for odd rows */
+  background-color: #f9f9f9;
 }
 
 tbody tr:nth-child(even) {
-  background-color: #ffffff; /* White for even rows */
+  background-color: #ffffff;
 }
 
+/* Buttons */
 .edit-button, .delete-button {
-  background-color: #e7e7e7; /* Light gray */
+  background-color: #e7e7e7;
   color: black;
   border: none;
   padding: 5px 10px;
@@ -179,10 +219,41 @@ tbody tr:nth-child(even) {
 }
 
 .edit-button:hover {
-  background-color: #d4d4d4; /* Darker gray */
+  background-color: #d4d4d4;
 }
 
 .delete-button:hover {
-  background-color: #d4d4d4; /* Darker gray */
+  background-color: #d4d4d4;
+}
+
+/* Dark mode styles */
+body.dark-mode table {
+  background-color: #2e2e2e; /* Background tabel gelap */
+  color: white; /* Teks putih */
+}
+
+body.dark-mode th, body.dark-mode td {
+  border: 1px solid #555; /* Border gelap */
+}
+
+body.dark-mode th {
+  background-color: #444; /* Header gelap */
+}
+
+body.dark-mode tbody tr:nth-child(odd) {
+  background-color: #3a3a3a; /* Baris ganjil gelap */
+}
+
+body.dark-mode tbody tr:nth-child(even) {
+  background-color: #2e2e2e; /* Baris genap gelap */
+}
+
+body.dark-mode .edit-button, body.dark-mode .delete-button {
+  background-color: #555;
+  color: white;
+}
+
+body.dark-mode .edit-button:hover, body.dark-mode .delete-button:hover {
+  background-color: #666;
 }
 </style>
