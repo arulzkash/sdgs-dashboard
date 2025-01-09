@@ -6,7 +6,7 @@
     </div>
     <!-- Tambahkan container untuk tombol -->
     <div class="button-container">
-      <button @click="loadDocuments" class="primary-button">Load Documents</button>
+      <button @click="navigateToAdd" class="primary-button">Add Document</button>
     </div>
     <table v-if="documents.length">
       <thead>
@@ -138,6 +138,9 @@ export default {
     },
     editDocument(id) {
       this.$router.push(`/edit/${id}`); // Navigate to the edit page
+    },
+    navigateToAdd() {
+      this.$router.push('/add'); // Navigate to the add page
     },
     formatNumber(value) {
       if (typeof value === 'number') {

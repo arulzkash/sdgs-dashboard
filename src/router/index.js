@@ -3,6 +3,7 @@ import Home from "@/components/Home.vue";
 import Crud from "@/components/Crud.vue";
 import Dashboard from "@/components/Dashboard.vue";
 import EditDocument from "@/components/EditDocument.vue";
+import AddDocument from "@/components/AddDocument.vue";
 
 const routes = [
   {
@@ -23,6 +24,11 @@ const routes = [
         path: "/edit/:id",
         name: "EditDocument",
         component: EditDocument,
+      },
+      {
+        path: "/add",
+        name: "AddDocument",
+        component: AddDocument,
       },
     ],
   },

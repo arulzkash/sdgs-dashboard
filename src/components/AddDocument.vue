@@ -1,7 +1,7 @@
 <template>
   <div class="max-w-2xl mx-auto p-4">
-    <h1 class="text-2xl font-bold mb-4">Edit Document</h1>
-    <form @submit.prevent="updateDocument" class="space-y-4">
+    <h1 class="text-2xl font-bold mb-4">Add Document</h1>
+    <form @submit.prevent="createDocument" class="space-y-4">
       <div class="form-group">
         <label for="countryName" class="block text-sm font-medium text-gray-700">Country Name</label>
         <input
@@ -43,7 +43,7 @@
         <button type="submit" class="btn btn-primary bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
           Save
         </button>
-        <button type="button" class="btn btn-secondary bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded" @click="cancelEdit">
+        <button type="button" class="btn btn-secondary bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded" @click="cancelAdd">
           Cancel
         </button>
       </div>
@@ -52,10 +52,10 @@
 </template>
 
 <script>
-import { fetchDocumentById, updateDocumentById } from "@/api/api.js";
+import { createDocument } from "@/api/api.js";
 
 export default {
-  name: "EditDocument",
+  name: "AddDocument",
   data() {
     return {
       document: {
@@ -98,36 +98,19 @@ export default {
     };
   },
   methods: {
-    async loadDocument() {
+    async createDocument() {
       try {
-        const response = await fetchDocumentById(this.$route.params.id);
-        this.document = response;
-        // Ensure all fields are present in the document data
-        this.allFields.forEach(field => {
-          if (!Object.prototype.hasOwnProperty.call(this.document.data, field)) {
-            this.document.data[field] = "";
-          }
-        });
-      } catch (error) {
-        console.error("Error loading document:", error);
-      }
-    },
-    async updateDocument() {
-      try {
-        console.log("Updating document:", this.document); // Debugging log
-        await updateDocumentById(this.document._id, this.document);
-        console.log("Document updated successfully"); // Debugging log
+        console.log("Creating document:", this.document); // Debugging log
+        await createDocument(this.document);
+        console.log("Document created successfully"); // Debugging log
         this.$router.push("/"); // Redirect to the main page after saving
       } catch (error) {
-        console.error("Error updating document:", error);
+        console.error("Error creating document:", error);
       }
     },
-    cancelEdit() {
+    cancelAdd() {
       this.$router.push("/"); // Redirect to the main page without saving
     }
-  },
-  mounted() {
-    this.loadDocument();
   }
 };
 </script>
