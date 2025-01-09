@@ -5,7 +5,16 @@ from database import document_collection
 async def get_all_documents() -> list[dict]:
     documents = []
     async for document in document_collection.find():
-        document["_id"] = str(document["_id"])
+        document["_id"] = str(document["_id"])  # Pastikan _id adalah string
+        # Tambahkan pemeriksaan jika ada field yang hilang
+        if "Country Name" not in document:
+            document["Country Name"] = "Unknown"
+        if "Country ISO3" not in document:
+            document["Country ISO3"] = "Unknown"
+        if "Year" not in document:
+            document["Year"] = 0
+        if "data" not in document:
+            document["data"] = {}  # Sesuaikan jika data kosong
         documents.append(document)
     return documents
 
@@ -13,7 +22,16 @@ async def get_all_documents() -> list[dict]:
 async def get_document(id: str) -> dict:
     document = await document_collection.find_one({"_id": ObjectId(id)})
     if document:
-        document["_id"] = str(document["_id"])
+        document["_id"] = str(document["_id"])  # Pastikan _id adalah string
+        # Tambahkan pemeriksaan jika ada field yang hilang
+        if "Country Name" not in document:
+            document["Country Name"] = "Unknown"
+        if "Country ISO3" not in document:
+            document["Country ISO3"] = "Unknown"
+        if "Year" not in document:
+            document["Year"] = 0
+        if "data" not in document:
+            document["data"] = {}  # Sesuaikan jika data kosong
         return document
     return None
 

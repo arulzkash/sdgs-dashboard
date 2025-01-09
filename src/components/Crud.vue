@@ -1,4 +1,5 @@
 // filepath: /c:/project2/sdgs-dashboard/src/components/Crud.vue
+
 <template>
   <div>
     <div class="Title-container">
@@ -11,80 +12,31 @@
     <table v-if="documents.length">
       <thead>
         <tr>
-          <th>Actions</th>
+          <th>NO</th>
           <th title="Country Name">Country Name</th>
           <th title="Country ISO3">Country ISO3</th>
           <th title="Year" class="sortable-header underline" @click="toggleSortOrder">Year</th>
           <th title="Agricultural land (sq. km)">Agri. land (sq. km)</th>
           <th title="Agricultural land (% of land area)">Agri. land (%)</th>
           <th title="Arable land (% of land area)">Arable land (%)</th>
-          <th title="Rural land area where elevation is below 5 meters (sq. km)">Rural land below 5m (sq. km)</th>
-          <th title="Rural land area where elevation is below 5 meters (% of total land area)">Rural land below 5m (%)</th>
-          <th title="Urban land area where elevation is below 5 meters (sq. km)">Urban land below 5m (sq. km)</th>
-          <th title="Urban land area where elevation is below 5 meters (% of total land area)">Urban land below 5m (%)</th>
-          <th title="Land area where elevation is below 5 meters (% of total land area)">Land below 5m (%)</th>
-          <th title="Forest area (sq. km)">Forest area (sq. km)</th>
-          <th title="Forest area (% of land area)">Forest area (%)</th>
-          <th title="Average precipitation in depth (mm per year)">Precipitation (mm/year)</th>
-          <th title="Cereal yield (kg per hectare)">Cereal yield (kg/ha)</th>
-          <th title="Access to electricity (% of population)">Electricity access (%)</th>
-          <th title="Renewable energy consumption (% of total final energy consumption)">Renewable energy (%)</th>
-          <th title="Disaster risk reduction progress score (1-5 scale; 5=best)">Disaster risk score</th>
-          <th title="Rural population living in areas where elevation is below 5 meters (% of total population)">Rural pop. below 5m (%)</th>
-          <th title="Urban population living in areas where elevation is below 5 meters (% of total population)">Urban pop. below 5m (%)</th>
-          <th title="Population living in areas where elevation is below 5 meters (% of total population)">Pop. below 5m (%)</th>
-          <th title="Population in urban agglomerations of more than 1 million (% of total population)">Urban agglom. > 1M (%)</th>
-          <th title="Terrestrial protected areas (% of total land area)">Terrestrial protected (%)</th>
-          <th title="Marine protected areas (% of territorial waters)">Marine protected (%)</th>
-          <th title="Terrestrial and marine protected areas (% of total territorial area)">Total protected (%)</th>
-          <th title="Ease of doing business rank (1=most business-friendly regulations)">Ease of business rank</th>
-          <th title="CPIA public sector management and institutions cluster average (1=low to 6=high)">CPIA score</th>
-          <th title="Poverty headcount ratio at $2.15 a day (2017 PPP) (% of population)">Poverty ratio (%)</th>
-          <th title="Population growth (annual %)">Pop. growth (%)</th>
-          <th title="Urban population growth (annual %)">Urban pop. growth (%)</th>
-          <th title="Urban population">Urban pop.</th>
-          <th title="Urban population (% of total population)">Urban pop. (%)</th>
+          <th >Actions</th>
         </tr>
       </thead>
       
       <tbody>
-        <tr v-for="document in documents" :key="document._id">
-          <td>
-            <button class="warning-button" @click="editDocument(document._id)">Edit</button>
-            <button class="danger-button" @click="confirmDelete(document._id)">Delete</button>
-          </td>
+        <tr v-for="(document, index) in documents" :key="document._id">
+          <td>{{ index + 1 }}</td>
           <td>{{ document["Country Name"] }}</td>
           <td>{{ document["Country ISO3"] }}</td>
           <td>{{ document.Year }}</td>
           <td>{{ formatNumber(document.data["Agricultural land (sq. km)"]) }}</td>
           <td>{{ formatNumber(document.data["Agricultural land (% of land area)"]) }}</td>
           <td>{{ formatNumber(document.data["Arable land (% of land area)"]) }}</td>
-          <td>{{ formatNumber(document.data["Rural land area where elevation is below 5 meters (sq. km)"]) }}</td>
-          <td>{{ formatNumber(document.data["Rural land area where elevation is below 5 meters (% of total land area)"]) }}</td>
-          <td>{{ formatNumber(document.data["Urban land area where elevation is below 5 meters (sq. km)"]) }}</td>
-          <td>{{ formatNumber(document.data["Urban land area where elevation is below 5 meters (% of total land area)"]) }}</td>
-          <td>{{ formatNumber(document.data["Land area where elevation is below 5 meters (% of total land area)"]) }}</td>
-          <td>{{ formatNumber(document.data["Forest area (sq. km)"]) }}</td>
-          <td>{{ formatNumber(document.data["Forest area (% of land area)"]) }}</td>
-          <td>{{ formatNumber(document.data["Average precipitation in depth (mm per year)"]) }}</td>
-          <td>{{ formatNumber(document.data["Cereal yield (kg per hectare)"]) }}</td>
-          <td>{{ formatNumber(document.data["Access to electricity (% of population)"]) }}</td>
-          <td>{{ formatNumber(document.data["Renewable energy consumption (% of total final energy consumption)"]) }}</td>
-          <td>{{ formatNumber(document.data["Disaster risk reduction progress score (1-5 scale; 5=best)"]) }}</td>
-          <td>{{ formatNumber(document.data["Rural population living in areas where elevation is below 5 meters (% of total population)"]) }}</td>
-          <td>{{ formatNumber(document.data["Urban population living in areas where elevation is below 5 meters (% of total population)"]) }}</td>
-          <td>{{ formatNumber(document.data["Population living in areas where elevation is below 5 meters (% of total population)"]) }}</td>
-          <td>{{ formatNumber(document.data["Population in urban agglomerations of more than 1 million (% of total population)"]) }}</td>
-          <td>{{ formatNumber(document.data["Terrestrial protected areas (% of total land area)"]) }}</td>
-          <td>{{ formatNumber(document.data["Marine protected areas (% of territorial waters)"]) }}</td>
-          <td>{{ formatNumber(document.data["Terrestrial and marine protected areas (% of total territorial area)"]) }}</td>
-          <td>{{ formatNumber(document.data["Ease of doing business rank (1=most business-friendly regulations)"]) }}</td>
-          <td>{{ formatNumber(document.data["CPIA public sector management and institutions cluster average (1=low to 6=high)"]) }}</td>
-          <td>{{ formatNumber(document.data["Poverty headcount ratio at $2.15 a day (2017 PPP) (% of population)"]) }}</td>
-          <td>{{ formatNumber(document.data["Population growth (annual %)"]) }}</td>
-          <td>{{ formatNumber(document.data["Urban population growth (annual %)"]) }}</td>
-          <td>{{ formatNumber(document.data["Urban population"]) }}</td>
-          <td>{{ formatNumber(document.data["Urban population (% of total population)"]) }}</td>
+          <td class="actions-container">
+            <button class="btn-sm warning-button" @click="editDocument(document._id)">Edit</button>
+            <button class="btn-sm danger-button" @click="confirmDelete(document._id)">Delete</button>
+            <button class="btn-sm primary-button"  @click="viewDetailsWithAlert(document._id)">Detail</button>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -93,16 +45,20 @@
 </template>
 
 <script>
-import { fetchDocuments, deleteDocument } from "@/api/api.js";
-
+import { fetchDocuments, deleteDocument,fetchDocumentById } from "@/api/api.js";
+import Swal from 'sweetalert2';
+// import axios from "axios";
 export default {
   name: "CrudPage",
   data() {
     return {
       documents: [],
       sortOrder: 'desc', // Default sort order
+      selectedDocument: null, // Untuk menyimpan dokumen yang dipilih
+      showDetailModal: false, // Untuk mengontrol tampilan modal detail
     };
   },
+
   methods: {
     async loadDocuments() {
       try {
@@ -123,6 +79,69 @@ export default {
         }
       });
     },
+async viewDetailsWithAlert(documentId) {
+  try {
+    const response = await fetchDocumentById(documentId);
+    console.log("API Response:", response); // Log the API response
+    this.selectedDocument = response; // Menyimpan document yang terpilih
+
+    // Buat konten yang ingin ditampilkan di SweetAlert2
+    let details = '';
+    
+    // Loop untuk mengecek semua field dan hanya menampilkan yang bukan undefined
+    const fields = [
+      "Country Name",
+      "Country ISO3",
+      "Year",
+      "Agricultural land (sq. km)",
+      "Agricultural land (% of land area)",
+      "Arable land (% of land area)",
+      "Average precipitation in depth (mm per year)",
+      "Cereal yield (kg per hectare)",
+      "Population in urban agglomerations of more than 1 million (% of total population)",
+      "Population growth (annual %)",
+      "Urban population growth (annual %)",
+      "Urban population",
+      "Urban population (% of total population)"
+    ];
+    
+    fields.forEach(field => {
+      // Cek apakah nilai field tersebut ada (bukan undefined)
+      if (this.selectedDocument[field] !== undefined && this.selectedDocument[field] !== null) {
+        details += `<div><strong>${field}:</strong> ${this.selectedDocument[field]}<div/>`;
+      }
+      else if (this.selectedDocument.data[field] !== undefined && this.selectedDocument.data[field] !== null) {
+        details += `<div><strong>${field}:</strong> ${this.selectedDocument.data[field]}<div/>`;
+      }
+    });
+
+    // Tampilkan detail menggunakan SweetAlert2
+    await Swal.fire({
+      title: 'Document Details',
+      html: details,
+      icon: 'info',
+      confirmButtonText: 'Close'
+    });
+
+    // Setelah menutup alert, load ulang data untuk menampilkan data awal
+    this.loadDocuments();
+  } catch (error) {
+    console.error("Error fetching document details:", error);
+    await Swal.fire({
+      title: 'Error',
+      text: 'Failed to fetch document details. Please try again.',
+      icon: 'error',
+      confirmButtonText: 'Close'
+    });
+  }
+},
+
+    formatNumber(value) {
+      if (typeof value === "number") {
+        return value.toFixed(2); // Format angka hingga 2 desimal
+      }
+      return value;
+    },
     toggleSortOrder() {
       // Toggle the sort order between 'asc' and 'desc'
       this.sortOrder = this.sortOrder === 'desc' ? 'asc' : 'desc';
@@ -141,12 +160,14 @@ export default {
         this.deleteDocument(id);
       }
     },
+
     editDocument(id) {
       this.$router.push(`/edit/${id}`); // Navigate to the edit page
     },
     navigateToAdd() {
       this.$router.push('/add'); // Navigate to the add page
     },
+    // eslint-disable-next-line no-dupe-keys, vue/no-dupe-keys
     formatNumber(value) {
       if (typeof value === 'number') {
         return value.toFixed(2); // Format number to 2 decimal places
@@ -157,6 +178,7 @@ export default {
   mounted() {
     this.loadDocuments();
   }
+  
 };
 </script>
 
@@ -168,6 +190,11 @@ export default {
   display: flex; /* Untuk tata letak fleksibel */
   justify-content: flex-start; /* Posisi tombol di kiri (bisa diganti ke 'center' atau 'flex-end') */
 }
+
+.actions-container{
+  display: flex;
+  gap: 4px;
+}
 .Title-container {
   font-size: xx-large;
   display: flex;
@@ -175,6 +202,7 @@ export default {
   align-items: center; /* Elemen dipusatkan secara horizontal */
   margin-top: 20px; /* Jarak dari atas halaman */
 }
+
 
 /* Button Warning (Kuning) */
 .warning-button {
@@ -198,7 +226,7 @@ export default {
 .danger-button {
   background-color: #dc3545; /* Warna merah */
   color: white; /* Teks putih */
-  padding: 3px 5px; /* Ukuran tombol */
+  padding: 5px 10px; /* Ukuran tombol */
   border: none; /* Hapus border default */
   border-radius: 5px; /* Sudut membulat */
   cursor: pointer; /* Tampilkan kursor pointer */
@@ -217,7 +245,7 @@ export default {
 .primary-button {
   background-color: #007bff; /* Warna biru */
   color: white; /* Teks putih */
-  padding: 10px 20px; /* Ukuran tombol */
+  padding: 5px 10px; /* Ukuran tombol */
   border: none; /* Hapus border default */
   border-radius: 5px; /* Sudut membulat */
   cursor: pointer; /* Tampilkan kursor pointer */
