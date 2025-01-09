@@ -46,7 +46,7 @@
         <tr v-for="document in documents" :key="document._id">
           <td>
             <button class="edit-button" @click="editDocument(document._id)">Edit</button>
-            <button class="delete-button" @click="deleteDocument(document._id)">Delete</button>
+            <button class="delete-button" @click="confirmDelete(document._id)">Delete</button>
           </td>
           <td>{{ document["Country Name"] }}</td>
           <td>{{ document["Country ISO3"] }}</td>
@@ -124,6 +124,11 @@ export default {
         this.loadDocuments(); // Reload documents after deletion
       } catch (error) {
         console.error(`Error deleting document with ID ${id}:`, error);
+      }
+    },
+    confirmDelete(id) {
+      if (confirm("Are you sure you want to delete this document?")) {
+        this.deleteDocument(id);
       }
     },
     editDocument(id) {
