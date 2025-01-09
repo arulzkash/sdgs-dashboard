@@ -3,37 +3,37 @@
     <h1 class="text-2xl font-bold mb-4">Add Document</h1>
     <form @submit.prevent="createDocument" class="space-y-4">
       <div class="form-group">
-        <label for="countryName" class="block text-sm font-medium text-gray-700">Country Name</label>
+        <label for="countryName" class="block text-sm font-medium ">Country Name</label>
         <input
           type="text"
-          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          class="mt-1 block input-colored w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           id="countryName"
           v-model="document['Country Name']"
         />
       </div>
       <div class="form-group">
-        <label for="countryISO3" class="block text-sm font-medium text-gray-700">Country ISO3</label>
+        <label for="countryISO3" class="block text-sm font-medium ">Country ISO3</label>
         <input
           type="text"
-          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          class="mt-1 block input-colored w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           id="countryISO3"
           v-model="document['Country ISO3']"
         />
       </div>
       <div class="form-group">
-        <label for="year" class="block text-sm font-medium text-gray-700">Year</label>
+        <label for="year" class="block text-sm font-medium  ">Year</label>
         <input
           type="number"
-          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          class="mt-1 block input-colored w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           id="year"
           v-model.number="document.Year"
         />
       </div>
       <div v-for="key in allFields" :key="key" class="form-group">
-        <label :for="key" class="block text-sm font-medium text-gray-700">{{ key }}</label>
+        <label :for="key" class="block text-sm font-medium  ">{{ key }}</label>
         <input
           type="number"
-          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          class="mt-1 block input-colored w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           :id="key"
           v-model.number="document.data[key]"
         />
@@ -127,6 +127,11 @@ export default {
 </script>
 
 <style scoped>
+
+.input-colored {
+  color: black; /* Warna font */
+}
+
 .form-group {
   margin-bottom: 15px;
 }
