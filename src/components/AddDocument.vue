@@ -29,14 +29,13 @@
           v-model.number="document.Year"
         />
       </div>
-      <hr>
       <div v-for="key in allFields" :key="key" class="form-group">
         <label :for="key" class="block text-sm font-medium text-gray-700">{{ key }}</label>
         <input
-          type="text"
+          type="number"
           class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           :id="key"
-          v-model="document.data[key]"
+          v-model.number="document.data[key]"
         />
       </div>
       <div class="flex space-x-4">
@@ -101,7 +100,19 @@ export default {
     async createDocument() {
       try {
         console.log("Creating document:", this.document); // Debugging log
-        await createDocument(this.document);
+        // Filter out empty fields
+        const filteredDocument = {
+          'Country Name': this.document['Country Name'],
+          'Country ISO3': this.document['Country ISO3'],
+          Year: this.document.Year,
+          data: {}
+        };
+        for (const key in this.document.data) {
+          if (this.document.data[key]) {
+            filteredDocument.data[key] = this.document.data[key];
+          }
+        }
+        await createDocument(filteredDocument);
         console.log("Document created successfully"); // Debugging log
         this.$router.push("/"); // Redirect to the main page after saving
       } catch (error) {

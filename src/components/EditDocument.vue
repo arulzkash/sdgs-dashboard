@@ -29,11 +29,10 @@
           v-model.number="document.Year"
         />
       </div>
-      <hr>
       <div v-for="key in allFields" :key="key" class="form-group">
         <label :for="key" class="block text-sm font-medium text-gray-700">{{ key }}</label>
         <input
-          type="text"
+          type="number"
           class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           :id="key"
           v-model="document.data[key]"
@@ -115,15 +114,27 @@ export default {
     async updateDocument() {
       try {
         console.log("Updating document:", this.document); // Debugging log
-        await updateDocumentById(this.document._id, this.document);
+        // Filter out empty fields
+        const filteredDocument = {
+          'Country Name': this.document['Country Name'],
+          'Country ISO3': this.document['Country ISO3'],
+          Year: this.document.Year,
+          data: {}
+        };
+        for (const key in this.document.data) {
+          if (this.document.data[key]) {
+            filteredDocument.data[key] = this.document.data[key];
+          }
+        }
+        await updateDocumentById(this.document._id, filteredDocument);
         console.log("Document updated successfully"); // Debugging log
-        this.$router.push("/"); // Redirect to the main page after saving
+        this.$router.push("/crud"); // Redirect to the main page after saving
       } catch (error) {
         console.error("Error updating document:", error);
       }
     },
     cancelEdit() {
-      this.$router.push("/"); // Redirect to the main page without saving
+      this.$router.push("/crud"); // Redirect to the main page without saving
     }
   },
   mounted() {
