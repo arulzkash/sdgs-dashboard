@@ -4,6 +4,7 @@ import Crud from "@/components/Crud.vue";
 import Dashboard from "@/components/Dashboard.vue";
 import EditDocument from "@/components/EditDocument.vue";
 import AddDocument from "@/components/AddDocument.vue";
+// import LoginPage from "@/components/LoginPage.vue";
 
 const routes = [
   {
@@ -32,11 +33,16 @@ const routes = [
       },
     ],
   },
+  // {
+  //   path: "/login",
+  //   name: "LoginPage",
+  //   component: LoginPage,
+  // },
 ];
 
 const router = createRouter({
-    history: createWebHistory(process.env.BASE_URL),
-    routes,
+  history: createWebHistory(process.env.BASE_URL),
+  routes,
 });
 
 export default router;

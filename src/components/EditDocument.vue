@@ -32,10 +32,10 @@
       <div v-for="key in allFields" :key="key" class="form-group">
         <label :for="key" class="block text-sm font-medium   ">{{ key }}</label>
         <input
-          type="number"
+          type="text"
           class="mt-1 block input-colored w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           :id="key"
-          v-model="document.data[key]"
+          v-model.number="document.data[key]"
         />
       </div>
       <div class="flex space-x-4">
